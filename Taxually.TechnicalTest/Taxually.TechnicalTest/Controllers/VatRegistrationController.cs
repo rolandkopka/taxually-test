@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using System.Xml.Serialization;
 using Microsoft.AspNetCore.Mvc;
+using Taxually.TechnicalTest.Services.VatRegistration;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,8 +9,20 @@ namespace Taxually.TechnicalTest.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class VatRegistrationController : ControllerBase
+    public class VatRegistrationController: ControllerBase
     {
+        private readonly IVatRegistrationService _vatRegistrationServiceGb;
+        private readonly IVatRegistrationService _vatRegistrationServiceFr;
+        private readonly IVatRegistrationService _vatRegistrationServiceDe;
+        
+        VatRegistrationController(IVatRegistrationService vatRegistrationServiceGb, IVatRegistrationService vatRegistrationServiceFr,
+                        IVatRegistrationService vatRegistrationServiceDe)
+        {
+            _vatRegistrationServiceGb = vatRegistrationServiceGb;
+            _vatRegistrationServiceFr = vatRegistrationServiceFr;
+            _vatRegistrationServiceDe = vatRegistrationServiceDe;
+        }
+
         /// <summary>
         /// Registers a company for a VAT number in a given country
         /// </summary>
@@ -19,31 +32,13 @@ namespace Taxually.TechnicalTest.Controllers
             switch (request.Country)
             {
                 case "GB":
-                    // UK has an API to register for a VAT number
-                    var httpClient = new TaxuallyHttpClient();
-                    await httpClient.PostAsync("https://api.uktax.gov.uk", request);
+                    await _vatRegistrationServiceGb.RegisterAsync(request);
                     break;
                 case "FR":
-                    // France requires an excel spreadsheet to be uploaded to register for a VAT number
-                    var csvBuilder = new StringBuilder();
-                    csvBuilder.AppendLine("CompanyName,CompanyId");
-                    csvBuilder.AppendLine($"{request.CompanyName}{request.CompanyId}");
-                    var csv = Encoding.UTF8.GetBytes(csvBuilder.ToString());
-                    var excelQueueClient = new TaxuallyQueueClient();
-                    // Queue file to be processed
-                    await excelQueueClient.EnqueueAsync("vat-registration-csv", csv);
+                    await _vatRegistrationServiceFr.RegisterAsync(request);
                     break;
                 case "DE":
-                    // Germany requires an XML document to be uploaded to register for a VAT number
-                    await using (var stringwriter = new StringWriter())
-                    {
-                        var serializer = new XmlSerializer(typeof(VatRegistrationRequest));
-                        serializer.Serialize(stringwriter, this);
-                        var xml = stringwriter.ToString();
-                        var xmlQueueClient = new TaxuallyQueueClient();
-                        // Queue xml doc to be processed
-                        await xmlQueueClient.EnqueueAsync("vat-registration-xml", xml);
-                    }
+                    await _vatRegistrationServiceDe.RegisterAsync(request);
                     break;
                 default:
                     throw new Exception("Country not supported");

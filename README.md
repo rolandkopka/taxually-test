@@ -29,3 +29,9 @@ To develop and submit your solution please follow these steps:
 ## Solution
 
 - .Wait() is blocking thread, so I replaced it with async/await
+- Created IVatRegistrationService and separate services for each country. This has a few benefits:
+  - Each service is responsible for a single country (Single Responsibility Principle)
+  - If we need to add a new country, we can do it without modifying existing code (Open/Closed Principle)
+  - We can easily test each service in isolation
+  - Readability is improved
+  
