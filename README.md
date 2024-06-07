@@ -23,3 +23,9 @@ To develop and submit your solution please follow these steps:
 1. Create a public repo in your own GitHub account and push the technical test there
 2. Develop your solution and push your changes to your own public GitHub repo
 3. Once you're happy with your solution send us a link to your repo
+
+---
+
+## Solution
+
+- .Wait() is blocking thread, so I replaced it with async/await
