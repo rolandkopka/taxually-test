@@ -1,6 +1,6 @@
 using System.Text;
 using Taxually.TechnicalTest.Clients;
-using Taxually.TechnicalTest.Controllers;
+using Taxually.TechnicalTest.Models;
 
 namespace Taxually.TechnicalTest.Services.VatRegistration;
 
