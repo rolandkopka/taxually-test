@@ -22,13 +22,13 @@ public class VatRegistrationController(
     {
         switch (request.Country)
         {
-            case "GB":
+            case Country.Gb:
                 await vatRegistrationServiceGb.RegisterAsync(request);
                 break;
-            case "FR":
+            case Country.Fr:
                 await vatRegistrationServiceFr.RegisterAsync(request);
                 break;
-            case "DE":
+            case Country.De:
                 await vatRegistrationServiceDe.RegisterAsync(request);
                 break;
             default:

@@ -42,3 +42,7 @@ To develop and submit your solution please follow these steps:
 - Primary constructor for less code
 - File scoped namespace for 1 less tabulation
 - Moved VatRegistrationRequest to its own file
+- Add constraints to the request body
+  - All fields are required
+  - String max length
+  - Country as enum
