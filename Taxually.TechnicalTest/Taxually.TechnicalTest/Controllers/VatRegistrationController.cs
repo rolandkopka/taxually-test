@@ -8,11 +8,7 @@ namespace Taxually.TechnicalTest.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class VatRegistrationController(
-                IVatRegistrationService vatRegistrationServiceGb,
-                IVatRegistrationService vatRegistrationServiceFr,
-                IVatRegistrationService vatRegistrationServiceDe)
-                : ControllerBase
+public class VatRegistrationController(IVatRegistrationServiceFactory vatRegistrationServiceFactory): ControllerBase
 {
     /// <summary>
     /// Registers a company for a VAT number in a given country
@@ -20,21 +16,8 @@ public class VatRegistrationController(
     [HttpPost]
     public async Task<ActionResult> Post([FromBody] VatRegistrationRequest request)
     {
-        switch (request.Country)
-        {
-            case Country.Gb:
-                await vatRegistrationServiceGb.RegisterAsync(request);
-                break;
-            case Country.Fr:
-                await vatRegistrationServiceFr.RegisterAsync(request);
-                break;
-            case Country.De:
-                await vatRegistrationServiceDe.RegisterAsync(request);
-                break;
-            default:
-                throw new Exception("Country not supported");
-
-        }
+        var service = vatRegistrationServiceFactory.GetService(request.Country);
+        await service.RegisterAsync(request);
         return Ok();
     }
 }

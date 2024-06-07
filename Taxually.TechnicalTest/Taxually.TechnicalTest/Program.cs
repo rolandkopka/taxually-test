@@ -9,9 +9,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IVatRegistrationService, VatRegistrationServiceGb>();
-builder.Services.AddScoped<IVatRegistrationService, VatRegistrationServiceFr>();
-builder.Services.AddScoped<IVatRegistrationService, VatRegistrationServiceDe>();
+builder.Services.AddScoped<VatRegistrationServiceGb>();
+builder.Services.AddScoped<VatRegistrationServiceFr>();
+builder.Services.AddScoped<VatRegistrationServiceDe>();
+builder.Services.AddScoped<IVatRegistrationServiceFactory, VatRegistrationServiceFactory>();
 
 var app = builder.Build();
 
