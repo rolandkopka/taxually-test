@@ -40,3 +40,4 @@ To develop and submit your solution please follow these steps:
   - More features
   - Better performance
 - Primary constructor for less code
+- File scoped namespace for 1 less tabulation

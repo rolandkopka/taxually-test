@@ -1,4 +1,5 @@
 using System.Text;
+using Taxually.TechnicalTest.Clients;
 using Taxually.TechnicalTest.Controllers;
 
 namespace Taxually.TechnicalTest.Services.VatRegistration;
