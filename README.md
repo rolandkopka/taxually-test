@@ -39,3 +39,4 @@ To develop and submit your solution please follow these steps:
   - Simple to upgrade
   - More features
   - Better performance
+- Primary constructor for less code
