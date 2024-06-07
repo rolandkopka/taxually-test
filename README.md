@@ -47,3 +47,4 @@ To develop and submit your solution please follow these steps:
   - String max length
   - Country as enum
 - Added a simple factory to access the correct service
+- Fixed German service (it was trying to read `this` instead of `request`)
