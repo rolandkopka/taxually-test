@@ -34,4 +34,8 @@ To develop and submit your solution please follow these steps:
   - If we need to add a new country, we can do it without modifying existing code (Open/Closed Principle)
   - We can easily test each service in isolation
   - Readability is improved
-  
+- Upgrade to .NET 8
+  - Latest LTS version
+  - Simple to upgrade
+  - More features
+  - Better performance
