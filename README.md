@@ -54,3 +54,7 @@ To develop and submit your solution please follow these steps:
 - Added unit tests (test coverage is not exhaustive)
   - Test each service
   - Test the controller
+
+- Breaking suggestions:
+  - change the api endpoint to `/api/v1/vat-registration` to follow RESTful conventions
+  - maybe same thing for the fields in the request body (e.g. `company-name` instead of `companyName`)
