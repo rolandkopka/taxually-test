@@ -50,4 +50,7 @@ To develop and submit your solution please follow these steps:
 - Fixed German service (it was trying to read `this` instead of `request`)
 - Refactored clients with dependency injection
   - Easy to mock for testing
-  - Easy to replace with a real client
+  - Easy to replace
+- Added unit tests (test coverage is not exhaustive)
+  - Test each service
+  - Test the controller
