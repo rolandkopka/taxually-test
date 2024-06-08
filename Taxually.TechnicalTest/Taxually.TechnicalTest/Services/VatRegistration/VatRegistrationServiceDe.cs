@@ -4,7 +4,7 @@ using Taxually.TechnicalTest.Models;
 
 namespace Taxually.TechnicalTest.Services.VatRegistration;
 
-public class VatRegistrationServiceDe: IVatRegistrationService
+public class VatRegistrationServiceDe(IQueueClient xmlQueueClient): IVatRegistrationService
 {
     public async Task RegisterAsync(VatRegistrationRequest request)
     {
@@ -14,7 +14,6 @@ public class VatRegistrationServiceDe: IVatRegistrationService
             var serializer = new XmlSerializer(typeof(VatRegistrationRequest));
             serializer.Serialize(stringwriter, request);
             var xml = stringwriter.ToString();
-            var xmlQueueClient = new TaxuallyQueueClient();
             // Queue xml doc to be processed
             await xmlQueueClient.EnqueueAsync("vat-registration-xml", xml);
         }

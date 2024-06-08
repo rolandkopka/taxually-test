@@ -1,3 +1,4 @@
+using Taxually.TechnicalTest.Clients;
 using Taxually.TechnicalTest.Services.VatRegistration;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +22,9 @@ builder.Services.AddScoped<VatRegistrationServiceGb>();
 builder.Services.AddScoped<VatRegistrationServiceFr>();
 builder.Services.AddScoped<VatRegistrationServiceDe>();
 builder.Services.AddScoped<IVatRegistrationServiceFactory, VatRegistrationServiceFactory>();
+
+builder.Services.AddScoped<IHttpClient, TaxuallyHttpClient>();
+builder.Services.AddScoped<IQueueClient, TaxuallyQueueClient>();
 
 var app = builder.Build();
 

@@ -4,7 +4,7 @@ using Taxually.TechnicalTest.Models;
 
 namespace Taxually.TechnicalTest.Services.VatRegistration;
 
-public class VatRegistrationServiceFr : IVatRegistrationService
+public class VatRegistrationServiceFr(IQueueClient excelQueueClient) : IVatRegistrationService
 {
     public async Task RegisterAsync(VatRegistrationRequest request)
     {
@@ -13,7 +13,6 @@ public class VatRegistrationServiceFr : IVatRegistrationService
         csvBuilder.AppendLine("CompanyName,CompanyId");
         csvBuilder.AppendLine($"{request.CompanyName}{request.CompanyId}");
         var csv = Encoding.UTF8.GetBytes(csvBuilder.ToString());
-        var excelQueueClient = new TaxuallyQueueClient();
         // Queue file to be processed
         await excelQueueClient.EnqueueAsync("vat-registration-csv", csv);
     }
