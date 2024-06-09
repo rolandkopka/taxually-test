@@ -4,7 +4,7 @@ using Taxually.TechnicalTest.Controllers;
 using Taxually.TechnicalTest.Models;
 using Taxually.TechnicalTest.Services.VatRegistration;
 
-namespace Taxually.TechnicalTest.Tests;
+namespace Taxually.TechnicalTest.Tests.UnitTests;
 
 public class VatRegistrationControllerTests
 {

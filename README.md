@@ -52,8 +52,7 @@ To develop and submit your solution please follow these steps:
   - Easy to mock for testing
   - Easy to replace
 - Added unit tests (test coverage is not exhaustive)
-  - Test each service
-  - Test the controller
+- Added integration tests
 
 - Breaking suggestions:
   - change the api endpoint to `/api/v1/vat-registration` to follow RESTful conventions

@@ -6,14 +6,15 @@ namespace Taxually.TechnicalTest.Models;
 public class VatRegistrationRequest
 {
     [Required]
-    [StringLength(1000)]
+    [StringLength(1000, MinimumLength = 1)]
     public string CompanyName { get; set; }
     
     [Required]
-    [StringLength(1000)]
+    [StringLength(1000, MinimumLength = 5)]
     public string CompanyId { get; set; }
     
     [Required]
+    [EnumDataType(typeof(Country), ErrorMessage = "Invalid or missing country code.")]
     public Country Country { get; set; }
 }
 
@@ -23,7 +24,7 @@ public class VatRegistrationRequest
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum Country
 {
-    Gb,
+    Gb = 1, // =1 to make the default value 0 invalid
     Fr,
     De
 }

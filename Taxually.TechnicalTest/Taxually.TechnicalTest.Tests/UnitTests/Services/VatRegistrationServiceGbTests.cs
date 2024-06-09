@@ -3,7 +3,7 @@ using Taxually.TechnicalTest.Clients;
 using Taxually.TechnicalTest.Models;
 using Taxually.TechnicalTest.Services.VatRegistration;
 
-namespace Taxually.TechnicalTest.Tests.Services;
+namespace Taxually.TechnicalTest.Tests.UnitTests.Services;
 
 public class VatRegistrationServiceGbTests
 {
