@@ -48,6 +48,7 @@ To develop and submit your solution please follow these steps:
   - Country as string enum
 - Added a simple factory to access the correct service
 - Fixed German service (it was trying to read `this` instead of `request`)
+- Fixed French service (was missing a comma in the CSV)
 - Refactored clients with dependency injection
   - Easy to mock for testing
   - Easy to replace
